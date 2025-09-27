@@ -150,5 +150,15 @@
             "repeatable": true
         }
     ],
+    "links": {
+      "control-center": [
+        {
+          "name": "Manage Survey Themes",
+          "icon": "fas fa-palette",
+          "url": "manage_global_themes.php",
+          "show-header-and-footer": false
+        }
+      ]
+    },
     "project-settings": [ ]
 }
