@@ -24,7 +24,7 @@
         },
         {
             "key": "survey_instructions",
-            "name": "<strong>[[lang=survey_65:Survey Instructions]]</strong>: Set content for elements <code>survey_154</code> and <code>global_80</code> in your custom language file",
+            "name": "<strong>[[lang=survey_65:Survey Instructions]]</strong>: Set preferred content for survey instruction elements in your custom language file:<ul><li><code>survey_154</code> \"Please complete the survey below.\"</li><li><code>global_80</code> \"Thank you!\"</li></ul>",
             "type": "descriptive"
         },
         {
@@ -107,7 +107,7 @@
         },
         {
             "key": "acknowledgement",
-            "name": "<strong>[[lang=survey_747:Survey Completion Text]]</strong>: Set content for elements <code>survey_155</code> and <code>survey_156</code> in your custom language file",
+            "name": "<strong>[[lang=survey_747:Survey Completion Text]]</strong>: Set content for survey completion text elements in your custom language file: <ul><li><code>survey_155</code> \"Thank you for taking the survey.\"</li><li><code>survey_156</code> \"Have a nice day!\"</li></ul>",
             "type": "descriptive"
         },
         {
