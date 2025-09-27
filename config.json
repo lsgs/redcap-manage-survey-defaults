@@ -24,7 +24,7 @@
         },
         {
             "key": "survey_instructions",
-            "name": "<strong>[[lang=survey_65:Survey Instructions]]</strong>: Set preferred content for survey instruction elements in your custom language file:<ul><li><code>survey_154</code> \"Please complete the survey below.\"</li><li><code>global_80</code> \"Thank you!\"</li></ul>",
+            "name": "<strong>[[lang=survey_65:Survey Instructions]]</strong>: Set preferred content for survey instruction elements in your custom language file:<ul><li><code>survey_154</code> \"Please complete the survey below.\"</li><li><code>global_83</code> \"Thank you!\"</li></ul>",
             "type": "descriptive"
         },
         {
