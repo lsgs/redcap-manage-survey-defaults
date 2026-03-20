@@ -27,9 +27,15 @@ class ManageSurveyDefaults extends AbstractExternalModule
         $this->overrideEmptyDefaultSettings(); // set values where system defaults are not the "empty" choice value
     }
 
-    public function redcap_module_configuration_settings($project_id, $settings) 
-    {
-        if (intval($project_id)) return; // return project-level settings unaltered
+
+    /**
+     * redcap_module_configuration_settings()
+     * Triggered when the system or project configuration dialog is displayed.
+     * Populate the theme dropdown choices.
+     * @param string $project_id, $settings
+     */
+    public function redcap_module_configuration_settings($project_id, $settings) {
+        if (intval($project_id)) return $settings; // return project-level settings unaltered
         
         foreach ($settings as &$setting) {
             $setting['name'] = $this->interpolateLanguageElements($setting['name']); 
@@ -43,7 +49,13 @@ class ManageSurveyDefaults extends AbstractExternalModule
             } else if ($setting['key']=='manage_global_themes') {
                 $url = $this->getUrl('manage_global_themes.php',false,false);
                 $setting['name'] = str_replace('href="#"', 'href="'.$url.'"', $setting['name']);
-                
+
+            } else if ($setting['key']=='global-theme-hidden') {
+                $setting['choices'] = $this->makeThemeChoices('0');
+            
+            } else if ($setting['key']=='global-theme-editable') {
+                $setting['choices'] = $this->makeThemeChoices('0');
+            
             } else if (array_key_exists('choices', $setting)) {
                 foreach ($setting['choices'] as &$choice) {
                     $choice['name'] = $this->interpolateLanguageElements($choice['name']);
@@ -93,7 +105,11 @@ class ManageSurveyDefaults extends AbstractExternalModule
             if (module.system_defaults['global-theme-hidden'].length) {
                 module.system_defaults['global-theme-hidden'].forEach(hiddenTheme => {
                     if (hiddenTheme!==null && hiddenTheme!=selectedTheme) {
-                        $("#theme option[value='"+hiddenTheme+"']").remove();
+                        if (hiddenTheme==0) {
+                            $('#theme option:first').remove(); // Default (value attr has no value)
+                        } else {
+                            $("#theme option[value='"+hiddenTheme+"']").remove();
+                        }
                         console.log(`Remove theme option ${hiddenTheme}`);
                     }
                 });
@@ -159,10 +175,10 @@ class ManageSurveyDefaults extends AbstractExternalModule
     /**
      * Get choices for Theme system setting dropdown list
      */
-    protected function makeThemeChoices()
+    protected function makeThemeChoices($valueForDefaultChoice='')
     {
         $themes = \Survey::getThemes(null, false, false);
-        $choices = array(array('value'=>'','name'=>RCView::tt('survey_1017',false)));
+        $choices = array(array('value'=>$valueForDefaultChoice,'name'=>RCView::tt('survey_1017',false)));
         foreach ($themes as $key => $label) {
             $choices[] = array('value'=>$key,'name'=>$label);
         }

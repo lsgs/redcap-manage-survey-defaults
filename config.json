@@ -132,10 +132,11 @@
         },
         {
             "key": "global-theme-hidden",
-            "name": "<span class=\"text-muted\">ID of global theme to be omitted from Survey Theme dropdown</span>",
+            "name": "<span class=\"text-muted\">Global theme to be omitted from Survey Theme dropdown</span>",
             "required": false,
-            "type": "text",
-            "repeatable": true
+            "repeatable": true,
+            "type": "dropdown",
+            "choices": [ ]
         },
         {
             "key": "section-editable",
@@ -144,10 +145,11 @@
         },
         {
             "key": "global-theme-editable",
-            "name": "<span class=\"text-muted\">ID of global theme that is editable</span>",
+            "name": "<span class=\"text-muted\">Global theme that is editable</span>",
             "required": false,
-            "type": "text",
-            "repeatable": true
+            "repeatable": true,
+            "type": "dropdown",
+            "choices": [ ]
         }
     ],
     "links": {
