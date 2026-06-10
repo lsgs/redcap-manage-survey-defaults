@@ -78,7 +78,12 @@ class ManageSurveyDefaults extends AbstractExternalModule
         foreach ($config['system-settings'] as $ss) {
             if ($ss['type']==='descriptive') continue;
             $value = $this->getSystemSetting($ss['key']);
-            $settings[$ss['key']] = $this->escape($value ?? '');
+            if ($ss['key']==='font_family' && $value==-1) {
+                // Arial option has no value; coded in system settings as -1 (0='Arial black')
+                $settings[$ss['key']] = '';
+            } else {
+                $settings[$ss['key']] = $this->escape($value ?? '');
+            }
         }
         $this->initializeJavascriptModuleObject();
 ?>
@@ -163,7 +168,7 @@ class ManageSurveyDefaults extends AbstractExternalModule
     protected function makeFontChoices()
     {
         $fonts = \Survey::getFonts();
-        $choices = array();
+        $choices = array(array('value'=>-1,'name'=>'Arial')); // Arial not returned by \Survey::getFonts(); can't use empty key as gets removed from settings returned to config dialog, 0 used for Arial Black
         foreach ($fonts as $key => $label) {
             $labelParts = explode(',',$label);
             $label = str_replace("'",'',$labelParts[0]);
